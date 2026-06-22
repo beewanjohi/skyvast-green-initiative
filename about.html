@@ -21,7 +21,7 @@
     </a>
     <nav class="nav-links" aria-label="Primary">
       <a href="index.html">Home</a>
-      <a href="about.html" class="active">About</a>
+      <div class="nav-item"><a href="about.html" class="nav-top active">About <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></a><div class="submenu"><a href="about.html">Overview</a><a href="partners.html">Partners</a><a href="team.html">Team</a><a href="contact.html">Contact Us</a></div></div>
       <a href="our-work.html">Our Work</a>
       <a href="impact.html">Impact</a>
       <a href="get-involved.html">Get Involved</a>
@@ -36,11 +36,15 @@
 <main id="main">
 
 <section class="page-hero has-photo">
-  <div class="ph-bg"><img src="assets/img/savanna.jpg" alt="" aria-hidden="true" /></div>
+  <div class="ph-bg"><img src="assets/img/tree-planting.jpg" alt="" aria-hidden="true" /></div>
   <div class="container">
-    <div class="breadcrumb"><a href="index.html">Home</a> / About</div>
-    <h1>Local roots. Global standards. Engineered impact.</h1>
-    <p>We exist to make water-vulnerable communities resilient — and to prove it, transparently, to the people who fund that work.</p>
+    <div class="breadcrumb"><a href="index.html">Home</a> / About / Overview</div>
+    <h1>Turning drylands into women- and youth-led economies.</h1>
+    <p>SkyVast Green Initiative is the ASAL gamechanger — engineering water security so Kenya's most climate-exposed communities can build lasting livelihoods, led by the women and young people at their heart.</p>
+    <div class="btn-row" style="margin-top:1.6rem">
+      <a class="btn btn--gold" href="#conviction">Our conviction</a>
+      <a class="btn btn--light" href="#sdgs">The SDGs we move</a>
+    </div>
   </div>
 </section>
 
@@ -51,7 +55,7 @@
       <span class="eyebrow">Who we are</span>
       <h2>The bridge between global capital and Africa's drylands</h2>
       <p class="lede">SkyVast Green Initiative (SGI) is a U.S.-registered 501(c)(3) nonprofit transforming Kenya's arid and semi-arid lands (ASALs) through water-smart, community-powered solutions that are local, data-driven and deeply rooted in equity.</p>
-      <p>Founded in 2021, we operate from two homes — Acworth, Georgia in the United States and Thindigua, Kenya — so we can offer donors both tax-deductible giving and direct, visible impact on the ground. Today we work across nine counties, and we instrument every project with technology so resilience is something you can measure, not just hope for.</p>
+      <p>Born from an encounter in <b>Diani, Kwale County in 2017</b> and formally established as a U.S. 501(c)(3), we operate from two homes — Acworth, Georgia in the United States and Thindigua, Kenya — uniting ten members across two continents to offer donors both tax-deductible giving and direct, visible impact on the ground. Today we work across nine counties, instrumenting every project with technology so resilience is something you can measure, not just hope for.</p>
       <div class="btn-row mt-1">
         <a class="btn btn--primary" href="our-work.html">How we work</a>
         <a class="btn btn--ghost" href="impact.html">Our impact</a>
@@ -82,6 +86,17 @@
         <h3>Our promise</h3>
         <p>Six outcomes from one investment, technology-verified end to end. We engineer resilience at every scale and prove it on a live dashboard.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- SGI PICTURES BAND -->
+<section class="section--tight">
+  <div class="container">
+    <div class="photo-strip reveal" style="grid-template-columns:repeat(3,1fr)">
+      <figure><img src="assets/img/seedling.jpg" alt="A woman farmer with her child among new green growth" loading="lazy" /><figcaption>Women lead the farm economy</figcaption></figure>
+      <figure><img src="assets/img/community.jpg" alt="Children carrying water near a community water point" loading="lazy" /><figcaption>Children, no longer walking for water</figcaption></figure>
+      <figure><img src="assets/img/water-collect.jpg" alt="Women of a Northern Kenyan community together" loading="lazy" /><figcaption>Communities restored to dignity</figcaption></figure>
     </div>
   </div>
 </section>
@@ -154,22 +169,63 @@
   </div>
 </section>
 
-<!-- TIMELINE -->
-<section class="section">
+<!-- CONVICTION / OUR STORY -->
+<section class="section bg-dark" id="conviction">
+  <div class="container split">
+    <div class="split-copy reveal">
+      <span class="eyebrow">Our conviction</span>
+      <h2>It began with two girls and a dried-up riverbed.</h2>
+      <p class="lede" style="color:#cfe6d8">SkyVast Green Initiative was born in 2017 in Diani, Kwale County, after we met two girls — neither older than nine — bent under jerry cans nearly their own size, having walked over ten kilometres to draw water from a dried-up riverbed.</p>
+      <p style="color:#b7d3c2">Shaken by the encounter, we drove them home and resolved to respond. Back in the United States, our founder gathered like-minded partners and established SkyVast Green Initiative. Today the organisation unites ten members — five in the diaspora and five in Kenya — working in tandem across continents to alleviate drought and engineer lasting resilience across Kenya's Arid and Semi-Arid Lands.</p>
+      <p style="color:#b7d3c2">That first conviction still governs every decision: no community should be defined by the distance to its nearest water. We don't hand out relief — we engineer self-reliant, women- and youth-led economies that outlast us.</p>
+    </div>
+    <div class="reveal" data-delay="1">
+      <div class="timeline" style="--tl-color:#43c389">
+        <div class="tl-item" style="border-color:#1c7a52"><div class="yr" style="color:#84e0b4">2017</div><h3 style="font-size:1.2rem;color:#fff">The encounter in Diani</h3><p style="color:#b7d3c2">Two girls, ten kilometres, a dry riverbed — the moment that started everything.</p></div>
+        <div class="tl-item" style="border-color:#1c7a52"><div class="yr" style="color:#84e0b4">Founding</div><h3 style="font-size:1.2rem;color:#fff">A 501(c)(3) takes shape</h3><p style="color:#b7d3c2">Our founder gathers partners in the U.S. and registers SGI — five members in the diaspora, five in Kenya.</p></div>
+        <div class="tl-item" style="border-color:#1c7a52"><div class="yr" style="color:#84e0b4">Scale-up</div><h3 style="font-size:1.2rem;color:#fff">Water, trees &amp; enterprise</h3><p style="color:#b7d3c2">Tanks, pans, reforestation and women-led enterprises spread across the ASAL counties — every asset GPS-tagged.</p></div>
+        <div class="tl-item" style="border-color:#1c7a52"><div class="yr" style="color:#84e0b4">Today</div><h3 style="font-size:1.2rem;color:#fff">9 counties &amp; growing</h3><p style="color:#b7d3c2">3,000+ families, 2M+ trees and 1B+ litres harvested — verified resilience, ready to scale.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SDGs -->
+<section class="section" id="sdgs">
   <div class="container">
     <div class="section-head center reveal">
-      <span class="eyebrow">Our journey</span>
-      <h2>From a single tank to a verified engine</h2>
+      <span class="eyebrow">Global goals, local delivery</span>
+      <h2>The Sustainable Development Goals we move</h2>
+      <p>Our model is engineered to move three primary SDGs at once, with two powerful secondary contributions — here's the weighting and exactly how each is delivered.</p>
     </div>
-    <div class="grid grid-2">
-      <div class="timeline reveal">
-        <div class="tl-item"><div class="yr">2021</div><h3 style="font-size:1.2rem">SkyVast is founded</h3><p>Registered as a U.S. 501(c)(3) with a clear thesis: pair global capital with local Kenyan delivery to engineer water resilience.</p></div>
-        <div class="tl-item"><div class="yr">2022</div><h3 style="font-size:1.2rem">First systems &amp; reforestation</h3><p>Household tanks, water pans and the first tree-planting drives take root across the eastern ASAL counties.</p></div>
+
+    <div class="sdg-wrap reveal">
+      <div class="donut">
+        <svg viewBox="0 0 120 120" role="img" aria-label="Donut chart of SDG contribution weighting">
+          <!-- circumference = 2*pi*47 ≈ 295.3 -->
+          <circle class="donut-seg" cx="60" cy="60" r="47" stroke="#1493bf" stroke-dasharray="88.6 206.7" stroke-dashoffset="0"></circle>
+          <circle class="donut-seg" cx="60" cy="60" r="47" stroke="#e0b84b" stroke-dasharray="73.8 221.5" stroke-dashoffset="-88.6"></circle>
+          <circle class="donut-seg" cx="60" cy="60" r="47" stroke="#279d68" stroke-dasharray="73.8 221.5" stroke-dashoffset="-162.4"></circle>
+          <circle class="donut-seg" cx="60" cy="60" r="47" stroke="#43c389" stroke-dasharray="29.5 265.8" stroke-dashoffset="-236.2"></circle>
+          <circle class="donut-seg" cx="60" cy="60" r="47" stroke="#7a5224" stroke-dasharray="29.5 265.8" stroke-dashoffset="-265.7"></circle>
+        </svg>
+        <div class="donut-center"><div><b>5</b><span>SDGs moved</span></div></div>
       </div>
-      <div class="timeline reveal" data-delay="1">
-        <div class="tl-item"><div class="yr">2023–24</div><h3 style="font-size:1.2rem">Technology verification</h3><p>GPS-tagging, AI tracking and live dashboards turn every deployment into auditable, donor-ready proof.</p></div>
-        <div class="tl-item"><div class="yr">Today</div><h3 style="font-size:1.2rem">9 counties &amp; scaling</h3><p>3,000+ families, 2M+ trees and 1B+ litres harvested — with a four-Pack model ready to scale to $1M+ county systems.</p></div>
+      <div class="sdg-legend">
+        <div class="sdg-row"><span class="sdg-dot" style="background:#1493bf"></span><div><b>SDG 6 — Clean Water &amp; Sanitation</b><small>Primary</small></div><span class="sdg-pct">30%</span></div>
+        <div class="sdg-row"><span class="sdg-dot" style="background:#e0b84b"></span><div><b>SDG 5 — Gender Equality</b><small>Primary</small></div><span class="sdg-pct">25%</span></div>
+        <div class="sdg-row"><span class="sdg-dot" style="background:#279d68"></span><div><b>SDG 8 — Decent Work &amp; Economic Growth</b><small>Primary</small></div><span class="sdg-pct">25%</span></div>
+        <div class="sdg-row"><span class="sdg-dot" style="background:#43c389"></span><div><b>SDG 13 — Climate Action</b><small>Secondary</small></div><span class="sdg-pct">10%</span></div>
+        <div class="sdg-row"><span class="sdg-dot" style="background:#7a5224"></span><div><b>SDG 15 — Life on Land</b><small>Secondary</small></div><span class="sdg-pct">10%</span></div>
       </div>
+    </div>
+
+    <div class="sdg-detail reveal">
+      <div class="sdg-card"><span class="tag" style="background:#d8eef5;color:#0b5e7a">SDG 6</span><h3 style="font-size:1.05rem">Clean Water &amp; Sanitation</h3><p style="font-size:.92rem;color:var(--ink-soft)">150,000 m³ of resilient water storage, 15 kiosks, 90 piped homesteads — solar-pumped and digitally metered.</p></div>
+      <div class="sdg-card" style="border-top-color:#e0b84b"><span class="tag" style="background:#f6eccf;color:#8a6a14">SDG 5</span><h3 style="font-size:1.05rem">Gender Equality</h3><p style="font-size:.92rem;color:var(--ink-soft)">Women lead the enterprise model — owning horticulture, processing and water-vending businesses; reclaiming hours once lost to water collection.</p></div>
+      <div class="sdg-card"><span class="tag">SDG 8</span><h3 style="font-size:1.05rem">Decent Work &amp; Economic Growth</h3><p style="font-size:.92rem;color:var(--ink-soft)">600 women- and youth-led enterprises, 10 cooperatives, revolving micro-credit and digital marketplaces.</p></div>
+      <div class="sdg-card" style="border-top-color:#43c389"><span class="tag">SDG 13</span><h3 style="font-size:1.05rem">Climate Action</h3><p style="font-size:.92rem;color:var(--ink-soft)">Drought-buffering water pans, climate-smart agriculture and WRUA-led water governance.</p></div>
+      <div class="sdg-card" style="border-top-color:#7a5224"><span class="tag" style="background:#ece0d2;color:#6b4a23">SDG 15</span><h3 style="font-size:1.05rem">Life on Land</h3><p style="font-size:.92rem;color:var(--ink-soft)">100 hectares restored; 60,000 seedlings established; check dams halting erosion.</p></div>
     </div>
   </div>
 </section>

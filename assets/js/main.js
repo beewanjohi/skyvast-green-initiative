@@ -141,4 +141,64 @@
   document.querySelectorAll("[data-year]").forEach(function (el) {
     el.textContent = new Date().getFullYear();
   });
+
+  /* ---- Splash intro ---- */
+  var splash = document.querySelector(".splash");
+  if (splash) {
+    var dismiss = function () { body.classList.add("splash-done"); };
+    setTimeout(dismiss, 3300);
+    splash.addEventListener("click", dismiss);
+  }
+
+  /* ---- Team bio modal ---- */
+  var modal = document.querySelector("[data-bio-modal]");
+  if (modal) {
+    var mPhoto = modal.querySelector("[data-m-photo]");
+    var mName = modal.querySelector("[data-m-name]");
+    var mRole = modal.querySelector("[data-m-role]");
+    var mBody = modal.querySelector("[data-m-body]");
+    var mContact = modal.querySelector("[data-m-contact]");
+    var lastFocus = null;
+
+    var openModal = function (card) {
+      lastFocus = card;
+      var photoNode = card.querySelector(".team-photo").cloneNode(true);
+      var vb = photoNode.querySelector(".view-bio");
+      if (vb) vb.remove();
+      mPhoto.innerHTML = photoNode.innerHTML;
+      mName.textContent = card.getAttribute("data-name") || "";
+      mRole.textContent = card.getAttribute("data-role") || "";
+      mBody.innerHTML = card.querySelector("[data-bio]").innerHTML;
+      var ln = card.getAttribute("data-linkedin");
+      var tel = card.getAttribute("data-tel");
+      var mail = card.getAttribute("data-email");
+      var html = "";
+      if (ln) html += '<a href="' + ln + '" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" width="15"><path d="M4.98 3.5A2.5 2.5 0 102.5 6 2.5 2.5 0 004.98 3.5zM3 8h4v13H3zM10 8h3.8v1.8h.05A4.2 4.2 0 0118 8c4 0 4 2.6 4 6v7h-4v-6c0-1.5 0-3.3-2-3.3s-2.3 1.6-2.3 3.2V21h-4z"/></svg>LinkedIn</a>';
+      if (tel) html += '<a href="tel:' + tel.replace(/[^+0-9]/g, "") + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="15"><path d="M5 4h4l2 5-3 2a12 12 0 006 6l2-3 5 2v4a2 2 0 01-2 2A18 18 0 013 6a2 2 0 012-2z"/></svg>' + tel + '</a>';
+      if (mail) html += '<a href="mailto:' + mail + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="15"><path d="M4 5h16v14H4z"/><path d="M4 6l8 6 8-6"/></svg>' + mail + '</a>';
+      mContact.innerHTML = html;
+      modal.classList.add("open");
+      body.style.overflow = "hidden";
+      modal.querySelector(".modal-close").focus();
+    };
+    var closeModal = function () {
+      modal.classList.remove("open");
+      body.style.overflow = "";
+      if (lastFocus) lastFocus.focus();
+    };
+
+    document.querySelectorAll(".team-card").forEach(function (card) {
+      card.setAttribute("tabindex", "0");
+      card.setAttribute("role", "button");
+      card.addEventListener("click", function () { openModal(card); });
+      card.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openModal(card); }
+      });
+    });
+    modal.querySelector(".modal-close").addEventListener("click", closeModal);
+    modal.querySelector(".modal-backdrop").addEventListener("click", closeModal);
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && modal.classList.contains("open")) closeModal();
+    });
+  }
 })();
