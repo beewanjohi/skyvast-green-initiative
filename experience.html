@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>From Dust to Dawn — SkyVast Green Initiative</title>
+<meta name="description" content="An immersive journey through the transformation of Kenya's drylands — from a dried-up riverbed to women- and youth-led economies. By SkyVast Green Initiative." />
+<meta property="og:title" content="From Dust to Dawn — SkyVast Green Initiative" />
+<meta property="og:description" content="Scroll the story of how water turns drought into thriving, women- and youth-led economies." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23279d68'/><path d='M50 22c10 16 18 24 18 36a18 18 0 11-36 0c0-12 8-20 18-36z' fill='%23fff'/></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/experience.css" />
+</head>
+<body class="exp">
+
+<!-- overlays -->
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+
+<!-- preloader -->
+<div class="preloader" id="preloader">
+  <div class="pl-inner">
+    <img src="assets/img/logo-color.png" alt="SkyVast Green Initiative" />
+    <div class="pl-word serif">From dust, we draw dawn.</div>
+    <div class="pl-track"><div class="pl-bar" id="plBar"></div></div>
+    <div class="pl-num" id="plNum">0%</div>
+  </div>
+</div>
+
+<!-- scroll progress water tube -->
+<div class="progress" aria-hidden="true"><div class="tube"><div class="fill" id="progFill"></div></div></div>
+
+<!-- floating nav -->
+<header class="exp-nav">
+  <a class="brand" href="index.html" data-cursor="Home"><img src="assets/img/logo-color.png" alt="SGI" /></a>
+  <nav class="exp-links">
+    <a class="ghost" href="index.html" data-cursor>Full site</a>
+    <a class="solid" href="get-involved.html#donate" data-cursor>Donate</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" data-theme="dust">
+  <div class="sky" data-parallax="0.2"></div>
+  <div class="sun" data-parallax="0.4" id="heroSun"></div>
+  <div class="wrap">
+    <h1 class="mega" data-split-lines>
+      <span class="ln"><span>From dust</span></span>
+      <span class="ln"><span>to dawn</span></span>
+    </h1>
+    <p class="sub">SkyVast Green Initiative · The ASAL Gamechanger</p>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><span class="mouse"></span></div>
+</section>
+
+<!-- ===================== DROUGHT / THE ENCOUNTER ===================== -->
+<section class="chapter c-drought" data-theme="dust">
+  <div class="layer" data-parallax="0.15" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;opacity:.5">
+      <rect width="1440" height="900" fill="#3a2614"/>
+      <g stroke="#5b3d1d" stroke-width="3" fill="none" opacity=".8">
+        <path d="M0 620 H1440 M300 620 V900 M720 620 V900 M1080 620 V900 M120 720 H1440 M0 800 H1440 M520 720 V900 M900 800 V900"/>
+      </g>
+      <ellipse cx="1140" cy="180" rx="150" ry="150" fill="#c98a3c" opacity=".55"/>
+    </svg>
+  </div>
+  <div class="wrap content">
+    <div class="kicker eyebrow">Chapter 01 — The encounter</div>
+    <p class="display fu" data-fade>Two girls. Nine years old.<br/>Ten kilometres for water<br/>from a riverbed that had<br/><em>run dry.</em></p>
+    <p class="lead fu" data-fade style="margin-top:1.8rem">Diani, Kwale County, 2017. We drove them home — and we could not look away. From that moment, SkyVast Green Initiative was born: a promise that no child's future should be measured by the distance to water.</p>
+  </div>
+</section>
+
+<!-- ===================== WATER ===================== -->
+<section class="chapter c-water" data-theme="water">
+  <div class="wrap content" style="display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,4rem);align-items:center">
+    <div>
+      <div class="kicker eyebrow">Chapter 02 — We catch the sky</div>
+      <h2 class="display fu" data-fade>So we taught the land<br/>to hold the rain.</h2>
+      <p class="lead fu" data-fade style="margin-top:1.6rem">Tanks, water pans and dams that capture every drop where it falls — turning a few weeks of rain into a year of life.</p>
+      <div class="fu" data-fade style="margin-top:2.4rem">
+        <div class="bignum"><span data-counter="1000000000" data-suffix="">0</span><span class="u">+ litres</span></div>
+        <div class="label-xl">harvested &amp; counting</div>
+      </div>
+    </div>
+    <div class="tank" data-cursor="Fill"><div class="water" id="tankWater"></div></div>
+  </div>
+</section>
+
+<!-- ===================== PILLARS (horizontal) ===================== -->
+<section class="chapter c-pillars" data-theme="green" style="padding:0">
+  <div class="h-head">
+    <div class="kicker eyebrow">Chapter 03 — Six outcomes, one drop</div>
+    <h2 class="display">Water sets<br/>everything in motion.</h2>
+  </div>
+  <div class="h-pin" id="hPin">
+    <div class="h-track" id="hTrack">
+      <article class="pillar-panel"><span class="pno">01</span><div class="glow"></div><h3>Water &amp; Food</h3><p>Rain harvesting, dams and water-smart farming that keep families fed through the dry season.</p></article>
+      <article class="pillar-panel"><span class="pno">02</span><div class="glow"></div><h3>Health</h3><p>Clean water and sanitation — ending the long walk and the waterborne disease that comes with it.</p></article>
+      <article class="pillar-panel"><span class="pno">03</span><div class="glow"></div><h3>Education</h3><p>Schools, training and the know-how for communities to run and own every system we build.</p></article>
+      <article class="pillar-panel"><span class="pno">04</span><div class="glow"></div><h3>Biodiversity</h3><p>Two million trees — every one GPS-tagged and tracked to survival, not just planting day.</p></article>
+      <article class="pillar-panel"><span class="pno">05</span><div class="glow"></div><h3>Livelihoods</h3><p>Women- and youth-led enterprises, from coffee to honey, built on new water security.</p></article>
+      <article class="pillar-panel"><span class="pno">06</span><div class="glow"></div><h3>Climate Resilience</h3><p>Drought-adapted infrastructure engineered for the ASALs — built to hold as the climate hardens.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOREST ===================== -->
+<section class="chapter c-forest" data-theme="green">
+  <div class="layer" data-parallax="0.2" aria-hidden="true" id="forestLayer">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%">
+      <g id="forestTrees" fill="#0c2a1d" opacity=".5">
+        <g class="tree"><rect x="200" y="640" width="14" height="120" fill="#5b3d1d"/><ellipse cx="207" cy="610" rx="80" ry="40"/></g>
+        <g class="tree"><rect x="560" y="600" width="18" height="160" fill="#5b3d1d"/><ellipse cx="569" cy="560" rx="110" ry="55"/></g>
+        <g class="tree"><rect x="980" y="640" width="14" height="120" fill="#5b3d1d"/><ellipse cx="987" cy="610" rx="90" ry="44"/></g>
+        <g class="tree"><rect x="1280" y="660" width="12" height="100" fill="#5b3d1d"/><ellipse cx="1286" cy="630" rx="70" ry="34"/></g>
+      </g>
+    </svg>
+  </div>
+  <div class="wrap content" style="text-align:center">
+    <div class="kicker eyebrow" style="justify-content:center">Chapter 04 — The green return</div>
+    <div class="bignum fu" data-fade><span data-counter="2000000">0</span><span class="u">+ trees</span></div>
+    <div class="label-xl fu" data-fade>planted · GPS-tagged · tracked to survival</div>
+    <p class="lead fu" data-fade style="margin:2rem auto 0">Where there was dust, there is canopy. Restoring the land is how we make resilience permanent — and how the rain learns to stay.</p>
+  </div>
+</section>
+
+<!-- ===================== ECONOMY ===================== -->
+<section class="chapter c-econ" data-theme="dawn">
+  <div class="wrap content">
+    <div class="kicker eyebrow" style="color:var(--green-900)">Chapter 05 — Dawn</div>
+    <h2 class="mega" style="color:var(--green-900);font-size:clamp(2.4rem,9vw,7rem)" data-split-lines>
+      <span class="ln"><span>Drylands become</span></span>
+      <span class="ln"><span>economies.</span></span>
+    </h2>
+    <p class="lead fu" data-fade style="color:#3a2614;margin-top:1.6rem">Led by the women and young people at their heart — owning the farms, the water, the enterprises and the future.</p>
+  </div>
+  <div class="marquee" style="margin-top:3rem;color:var(--green-900)">
+    <div class="track" id="marquee">
+      <span>Horticulture</span><span class="dot">•</span><span>Coffee</span><span class="dot">•</span><span>Honey</span><span class="dot">•</span><span>Water vending</span><span class="dot">•</span><span>Cooperatives</span><span class="dot">•</span><span>Micro-credit</span><span class="dot">•</span>
+      <span>Horticulture</span><span class="dot">•</span><span>Coffee</span><span class="dot">•</span><span>Honey</span><span class="dot">•</span><span>Water vending</span><span class="dot">•</span><span>Cooperatives</span><span class="dot">•</span><span>Micro-credit</span><span class="dot">•</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== IMPACT ===================== -->
+<section class="chapter c-impact" data-theme="dust">
+  <div class="wrap content">
+    <div class="kicker eyebrow" style="justify-content:center;width:100%;text-align:center;display:flex">Verified, not estimated</div>
+    <div class="stat-row" style="margin-top:1rem">
+      <div class="fu" data-fade><div class="bignum"><span data-counter="3000">0</span><span class="u">+</span></div><div class="label-xl">Families</div></div>
+      <div class="fu" data-fade><div class="bignum"><span data-counter="2000000">0</span><span class="u">+</span></div><div class="label-xl">Trees</div></div>
+      <div class="fu" data-fade><div class="bignum"><span data-counter="1000000000" data-short="b">0</span><span class="u">+</span></div><div class="label-xl">Litres</div></div>
+      <div class="fu" data-fade><div class="bignum"><span data-counter="9">0</span></div><div class="label-xl">Counties</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FINALE ===================== -->
+<section class="chapter c-finale" data-theme="green">
+  <div class="wrap content">
+    <div class="kicker eyebrow" style="justify-content:center">The revolution is water</div>
+    <h2 class="mega" data-split-lines style="font-size:clamp(2.6rem,11vw,9rem)">
+      <span class="ln"><span>Be the</span></span>
+      <span class="ln"><span>dawn.</span></span>
+    </h2>
+    <p class="lead fu" data-fade style="margin:1.6rem auto 0">Every dollar is engineered into verified, lasting resilience — and you'll see exactly what it builds.</p>
+    <div class="fu" data-fade style="margin-top:2.6rem">
+      <a class="magnetic" href="get-involved.html#donate" data-magnetic data-cursor="Give"><span class="m-inner">Fund a community
+        <svg viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    </div>
+    <div class="finale-links">
+      <a class="text" href="our-work.html" data-cursor>Explore our work</a>
+      <a class="text" href="impact.html" data-cursor>See the impact</a>
+      <a class="text" href="about.html" data-cursor>Our story</a>
+    </div>
+  </div>
+</section>
+
+<footer class="exp-footer">
+  <div class="wrap">© <span id="yr">2026</span> SkyVast Green Initiative · U.S. 501(c)(3) · <a href="index.html">Return to the full site</a></div>
+</footer>
+
+</main>
+
+<!-- libs -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="assets/js/experience.js"></script>
+</body>
+</html>

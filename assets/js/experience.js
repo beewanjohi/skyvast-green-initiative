@@ -1,0 +1,206 @@
+/* ==========================================================================
+   SkyVast — "From Dust to Dawn" immersive experience
+   GSAP + ScrollTrigger + Lenis. Degrades gracefully if libs/IO unavailable.
+   ========================================================================== */
+(function () {
+  "use strict";
+  var doc = document, body = doc.body;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var hasGSAP = typeof window.gsap !== "undefined";
+  var hasST = hasGSAP && typeof window.ScrollTrigger !== "undefined";
+  var hasLenis = typeof window.Lenis !== "undefined";
+
+  doc.getElementById("yr") && (doc.getElementById("yr").textContent = new Date().getFullYear());
+
+  /* ---------------- Preloader ---------------- */
+  var pre = doc.getElementById("preloader");
+  var plBar = doc.getElementById("plBar"), plNum = doc.getElementById("plNum");
+  function startSite() {
+    body.classList.add("ready");
+    initSplitReveal();
+    if (hasST) buildScroll();
+    else fallbackReveal();
+  }
+  function runPreloader() {
+    var p = 0;
+    var t = setInterval(function () {
+      p += Math.max(2, (100 - p) * 0.12);
+      if (p >= 100) { p = 100; clearInterval(t); finishPre(); }
+      if (plBar) plBar.style.width = p + "%";
+      if (plNum) plNum.textContent = Math.round(p) + "%";
+    }, 60);
+  }
+  function finishPre() {
+    if (!pre) { startSite(); return; }
+    if (hasGSAP) {
+      window.gsap.to(pre, { yPercent: -100, duration: 1.0, ease: "power4.inOut", delay: 0.15,
+        onComplete: function () { pre.style.display = "none"; } });
+      window.gsap.delayedCall(0.5, startSite);
+    } else {
+      pre.style.transition = "opacity .6s"; pre.style.opacity = "0";
+      setTimeout(function () { pre.style.display = "none"; startSite(); }, 600);
+    }
+  }
+
+  /* ---------------- Split-line hero reveal ---------------- */
+  function initSplitReveal() {
+    if (reduce || !hasGSAP) {
+      doc.querySelectorAll(".mega .ln > span").forEach(function (s) { s.style.transform = "none"; });
+      return;
+    }
+  }
+  function revealMega(scope) {
+    if (!hasGSAP) return;
+    var spans = (scope || doc).querySelectorAll(".mega .ln > span");
+    window.gsap.to(spans, { yPercent: 0, duration: 1.1, ease: "power4.out", stagger: 0.08 });
+  }
+
+  /* ---------------- Counters ---------------- */
+  function formatCount(v, el) {
+    if (el.getAttribute("data-short") === "b") return (v / 1e9).toFixed(v >= 1e9 ? 0 : 1) + "B";
+    return Math.round(v).toLocaleString("en-US");
+  }
+  function animateCounter(el) {
+    var target = parseFloat(el.getAttribute("data-counter"));
+    if (hasGSAP && !reduce) {
+      var obj = { v: 0 };
+      window.gsap.to(obj, { v: target, duration: 2.0, ease: "power2.out",
+        onUpdate: function () { el.textContent = formatCount(obj.v, el); } });
+    } else { el.textContent = formatCount(target, el); }
+  }
+
+  /* ---------------- Fallback (no ScrollTrigger) ---------------- */
+  function fallbackReveal() {
+    revealMega();
+    doc.querySelectorAll("[data-fade]").forEach(function (el) { el.classList.remove("fu"); });
+    doc.querySelectorAll("[data-counter]").forEach(animateCounter);
+    var tw = doc.getElementById("tankWater"); if (tw) tw.style.height = "82%";
+  }
+
+  /* ---------------- Lenis smooth scroll ---------------- */
+  var lenis = null;
+  function initLenis() {
+    if (!hasLenis || reduce) return;
+    lenis = new window.Lenis({ duration: 1.15, smoothWheel: true,
+      easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); } });
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+    if (hasST) { lenis.on("scroll", window.ScrollTrigger.update); }
+  }
+
+  /* ---------------- Build all scroll animations ---------------- */
+  function buildScroll() {
+    var gsap = window.gsap, ST = window.ScrollTrigger;
+    gsap.registerPlugin(ST);
+    initLenis();
+
+    // Hero mega reveal on load
+    revealMega(doc.querySelector(".hero"));
+
+    // Parallax layers
+    gsap.utils.toArray("[data-parallax]").forEach(function (el) {
+      var depth = parseFloat(el.getAttribute("data-parallax")) || 0.2;
+      gsap.to(el, { yPercent: depth * 60, ease: "none",
+        scrollTrigger: { trigger: el.closest("section") || el, start: "top bottom", end: "bottom top", scrub: true } });
+    });
+
+    // Hero sun rises + fades
+    var sun = doc.getElementById("heroSun");
+    if (sun) gsap.to(sun, { yPercent: -30, scale: 1.3, opacity: 0.25, ease: "none",
+      scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+
+    // Fade-up groups
+    gsap.utils.toArray("[data-fade]").forEach(function (el) {
+      gsap.to(el, { opacity: 1, y: 0, duration: 1, ease: "power3.out",
+        scrollTrigger: { trigger: el, start: "top 82%" } });
+    });
+
+    // Mega lines in later chapters
+    gsap.utils.toArray(".chapter [data-split-lines]").forEach(function (m) {
+      var spans = m.querySelectorAll(".ln > span");
+      gsap.to(spans, { yPercent: 0, duration: 1.1, ease: "power4.out", stagger: 0.08,
+        scrollTrigger: { trigger: m, start: "top 80%" } });
+    });
+
+    // Counters
+    gsap.utils.toArray("[data-counter]").forEach(function (el) {
+      ST.create({ trigger: el, start: "top 85%", once: true, onEnter: function () { animateCounter(el); } });
+    });
+
+    // Water tank fill
+    var tank = doc.getElementById("tankWater");
+    if (tank) gsap.fromTo(tank, { height: "6%" }, { height: "86%", ease: "none",
+      scrollTrigger: { trigger: ".c-water", start: "top 70%", end: "bottom bottom", scrub: true } });
+
+    // Horizontal pillars
+    var track = doc.getElementById("hTrack"), pin = doc.getElementById("hPin");
+    if (track && pin) {
+      var getScroll = function () { return track.scrollWidth - pin.clientWidth + window.innerWidth * 0.16; };
+      gsap.to(track, { x: function () { return -getScroll(); }, ease: "none",
+        scrollTrigger: { trigger: ".c-pillars", start: "top top", end: function () { return "+=" + getScroll(); },
+          pin: true, scrub: 1, invalidateOnRefresh: true } });
+    }
+
+    // Forest trees grow
+    gsap.utils.toArray("#forestTrees .tree").forEach(function (tr, i) {
+      gsap.fromTo(tr, { scaleY: 0.05, transformOrigin: "bottom center", opacity: 0.2 },
+        { scaleY: 1, opacity: 0.5, ease: "power2.out", duration: 1,
+          scrollTrigger: { trigger: ".c-forest", start: "top 70%", end: "center center", scrub: true } });
+    });
+
+    // Marquee drift
+    var mq = doc.getElementById("marquee");
+    if (mq) gsap.to(mq, { xPercent: -50, ease: "none",
+      scrollTrigger: { trigger: ".c-econ", start: "top bottom", end: "bottom top", scrub: 1 } });
+
+    // Progress water tube
+    var fill = doc.getElementById("progFill");
+    if (fill) ST.create({ start: 0, end: "max",
+      onUpdate: function (self) { fill.style.height = (self.progress * 100) + "%"; } });
+
+    ST.refresh();
+  }
+
+  /* ---------------- Custom cursor + magnetic ---------------- */
+  function initCursor() {
+    if (reduce || matchMedia("(hover:none)").matches) return;
+    var ring = doc.querySelector(".cursor"), dot = doc.querySelector(".cursor-dot");
+    if (!ring || !dot) return;
+    var rx = innerWidth / 2, ry = innerHeight / 2, dx = rx, dy = ry, tx = rx, ty = ry;
+    window.addEventListener("mousemove", function (e) { tx = e.clientX; ty = e.clientY; dot.style.transform = "translate(" + tx + "px," + ty + "px) translate(-50%,-50%)"; });
+    (function loop() {
+      rx += (tx - rx) * 0.18; ry += (ty - ry) * 0.18;
+      ring.style.transform = "translate(" + rx + "px," + ry + "px) translate(-50%,-50%)";
+      requestAnimationFrame(loop);
+    })();
+    doc.querySelectorAll("[data-cursor], a, button").forEach(function (el) {
+      el.addEventListener("mouseenter", function () {
+        ring.classList.add("hot");
+        ring.setAttribute("data-label", el.getAttribute("data-cursor") || "");
+      });
+      el.addEventListener("mouseleave", function () { ring.classList.remove("hot"); ring.removeAttribute("data-label"); });
+    });
+
+    // Magnetic
+    if (hasGSAP) {
+      doc.querySelectorAll("[data-magnetic]").forEach(function (btn) {
+        var inner = btn.querySelector(".m-inner") || btn;
+        btn.addEventListener("mousemove", function (e) {
+          var r = btn.getBoundingClientRect();
+          var mx = e.clientX - r.left - r.width / 2, my = e.clientY - r.top - r.height / 2;
+          window.gsap.to(btn, { x: mx * 0.3, y: my * 0.4, duration: 0.4, ease: "power3.out" });
+          window.gsap.to(inner, { x: mx * 0.15, y: my * 0.2, duration: 0.4, ease: "power3.out" });
+        });
+        btn.addEventListener("mouseleave", function () {
+          window.gsap.to(btn, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1,0.4)" });
+          window.gsap.to(inner, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1,0.4)" });
+        });
+      });
+    }
+  }
+
+  /* ---------------- Go ---------------- */
+  initCursor();
+  if (reduce) { if (pre) pre.style.display = "none"; startSite(); }
+  else { window.addEventListener("load", runPreloader); setTimeout(function () { if (pre && pre.style.display !== "none" && !body.classList.contains("ready")) runPreloader(); }, 1200); }
+})();

@@ -519,8 +519,20 @@ img { max-width: 100%; }
   .page-hero.has-photo .ph-bg img { animation: none; transform: none; }
   .reveal { transition: none; }
   .splash, .splash * { animation: none !important; }
+  .exp-pulse::after { animation: none !important; }
   * { scroll-behavior: auto; }
 }
+
+/* Immersive-experience entry link (on home hero) */
+.exp-entry { display: inline-flex; align-items: center; gap: .7rem; margin-top: 1.8rem; color: #cfe6d8; font-weight: 700; font-size: .92rem; transition: color .3s; }
+.exp-entry em { color: #fff; font-style: italic; }
+.exp-entry:hover { color: #fff; }
+.exp-entry svg { transition: transform .3s var(--ease); }
+.exp-entry:hover svg { transform: translateX(5px); }
+.exp-pulse { width: 10px; height: 10px; border-radius: 50%; background: var(--green-300); position: relative; flex: none; }
+.exp-pulse::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--green-300); animation: expPulse 1.8s ease-out infinite; }
+@keyframes expPulse { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(3.6); opacity: 0; } }
+.nav-links a.nav-exp { color: var(--green-700); font-weight: 800; }
 
 /* ==========================================================================
    Nav dropdown (About submenu)
