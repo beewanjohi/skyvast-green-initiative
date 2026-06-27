@@ -31,6 +31,7 @@
     if (reduce) return;
     var hero = doc.querySelector(".hero"); if (!hero) return;
     var img = hero.querySelector(".hero-bg img"), title = doc.getElementById("heroTitle");
+    var foot = hero.querySelector(".hero-foot"), cue = hero.querySelector(".scroll-cue");
     var tx = 0, ty = 0, ox = 0, oy = 0;
     hero.addEventListener("pointermove", function (e) {
       var r = hero.getBoundingClientRect();
@@ -40,8 +41,15 @@
     hero.addEventListener("pointerleave", function () { tx = 0; ty = 0; });
     (function loop() {
       ox += (tx - ox) * 0.06; oy += (ty - oy) * 0.06;
-      if (img) img.style.transform = "translate(" + (ox * -30) + "px," + (oy * -26) + "px) scale(1.1)";
-      if (title) title.style.transform = "translate(" + (ox * 24) + "px," + (oy * 16) + "px)";
+      var hh = hero.offsetHeight || window.innerHeight;
+      var sp = Math.min(Math.max((window.pageYOffset || 0) / hh, 0), 1);
+      // multi-axis scroll movement + cursor parallax + subtle tilt for realism
+      var sx = sp * 34, sy = sp * 58, sScale = 1.08 + sp * 0.14, sRot = sp * 1.4;
+      if (img) img.style.transform =
+        "translate3d(" + (ox * -28 + sx) + "px," + (oy * -24 + sy) + "px,0) scale(" + sScale + ") rotate(" + (ox * 1.3 + sRot) + "deg)";
+      if (title) title.style.transform = "translate(" + (ox * 22 + sx * 0.35) + "px," + (oy * 14 - sy * 0.55) + "px)";
+      if (foot) { foot.style.transform = "translateY(" + (sy * 0.5) + "px)"; foot.style.opacity = String(1 - sp * 1.3); }
+      if (cue) cue.style.opacity = String(0.6 - sp * 1.2);
       requestAnimationFrame(loop);
     })();
   }
@@ -167,10 +175,8 @@
         scrollTrigger: { trigger: el.closest("section") || el, start: "top bottom", end: "bottom top", scrub: true } });
     });
 
-    // Hero background slowly scales + dims as you scroll past
-    var heroBg = doc.getElementById("heroBg");
-    if (heroBg) gsap.to(heroBg, { scale: 1.14, opacity: 0.6, ease: "none", transformOrigin: "50% 50%",
-      scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+    // Hero background motion is handled in the rAF loop (initHeroInteractions),
+    // combining cursor parallax with multi-axis scroll movement.
 
     // Fade-up groups
     gsap.utils.toArray("[data-fade]").forEach(function (el) {
