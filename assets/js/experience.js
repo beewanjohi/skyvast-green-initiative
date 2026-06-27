@@ -23,6 +23,27 @@
     body.classList.add("ready");
     initSplitReveal();
     if (hasST) buildScroll(); else fallbackReveal();
+    initHeroInteractions();
+  }
+
+  /* hero pointer parallax — orb follows cursor, title drifts opposite */
+  function initHeroInteractions() {
+    if (reduce) return;
+    var hero = doc.querySelector(".hero"); if (!hero) return;
+    var orb = hero.querySelector(".hero-orb"), title = doc.getElementById("heroTitle");
+    var tx = 0, ty = 0, ox = 0, oy = 0, active = false;
+    hero.addEventListener("pointermove", function (e) {
+      var r = hero.getBoundingClientRect();
+      tx = (e.clientX - r.left) / r.width - 0.5;
+      ty = (e.clientY - r.top) / r.height - 0.5; active = true;
+    });
+    hero.addEventListener("pointerleave", function () { tx = 0; ty = 0; });
+    (function loop() {
+      ox += (tx - ox) * 0.07; oy += (ty - oy) * 0.07;
+      if (orb) orb.style.transform = "translate(" + (ox * 42) + "px," + (oy * 42) + "px) scale(1.03)";
+      if (title) title.style.transform = "translate(" + (ox * -28) + "px," + (oy * -18) + "px)";
+      requestAnimationFrame(loop);
+    })();
   }
 
   /* cursor-driven spotlight + title/image parallax */
@@ -146,9 +167,9 @@
         scrollTrigger: { trigger: el.closest("section") || el, start: "top bottom", end: "bottom top", scrub: true } });
     });
 
-    // Hero sun rises + fades
-    var sun = doc.getElementById("heroSun");
-    if (sun) gsap.to(sun, { yPercent: -30, scale: 1.3, opacity: 0.25, ease: "none",
+    // Hero orb drifts up + scales as you scroll past
+    var orbWrap = doc.getElementById("heroOrb");
+    if (orbWrap) gsap.to(orbWrap, { yPercent: -22, scale: 1.18, opacity: 0.55, ease: "none",
       scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
 
     // Fade-up groups
