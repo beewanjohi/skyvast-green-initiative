@@ -49,14 +49,37 @@ a{color:inherit;text-decoration:none}
 .cursor.hot::after{content:attr(data-label);position:absolute;inset:0;display:grid;place-items:center;font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green-300)}
 @media (hover:none){.cursor,.cursor-dot{display:none}}
 
-/* ---------- Preloader ---------- */
-.preloader{position:fixed;inset:0;z-index:200;background:var(--dust-900);display:grid;place-items:center}
-.preloader .pl-inner{text-align:center;width:min(520px,80vw)}
-.preloader img{width:130px;margin:0 auto 1.4rem;filter:brightness(0) invert(1);opacity:.92}
-.preloader .pl-word{font-family:var(--font-display);font-size:clamp(1.4rem,4vw,2.4rem);letter-spacing:.02em}
-.preloader .pl-track{height:2px;background:rgba(244,234,214,.18);margin-top:1.4rem;overflow:hidden;border-radius:2px}
-.preloader .pl-bar{height:100%;width:0;background:linear-gradient(90deg,var(--water-300),var(--green-300),var(--gold))}
-.preloader .pl-num{margin-top:.7rem;font-variant-numeric:tabular-nums;font-weight:800;letter-spacing:.2em;opacity:.7;font-size:.8rem}
+/* ---------- Interactive preloader (ASAL Gamechanger) ---------- */
+.preloader{position:fixed;inset:0;z-index:200;overflow:hidden;background:#1a0f06;color:#f4ead6}
+.pl-photo{position:absolute;inset:0;z-index:0}
+.pl-img{position:absolute;inset:-7%;background:url("../img/asal-preloader.jpg") center/cover no-repeat;will-change:transform}
+.pl-dim{filter:grayscale(.65) brightness(.34) contrast(1.06)}
+.pl-bright{filter:saturate(1.08) brightness(.92);
+  -webkit-mask-image:radial-gradient(circle var(--r,240px) at var(--mx,50%) var(--my,42%), #000 0%, rgba(0,0,0,.45) 48%, transparent 72%);
+          mask-image:radial-gradient(circle var(--r,240px) at var(--mx,50%) var(--my,42%), #000 0%, rgba(0,0,0,.45) 48%, transparent 72%)}
+.pl-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,12,6,.5),rgba(20,12,6,.12) 38%,rgba(20,12,6,.82))}
+.no-hover .pl-bright{-webkit-mask-image:none;mask-image:none;filter:saturate(1.05) brightness(.78)}
+
+.pl-ui{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(1.4rem,4vw,3rem);pointer-events:none}
+.pl-top{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.pl-top .pl-logo{height:40px;filter:brightness(0) invert(1)}
+.pl-top .pl-tag{letter-spacing:.28em;text-transform:uppercase;font-size:.66rem;font-weight:800;opacity:.85}
+.pl-title{font-family:var(--font-display);font-weight:600;text-transform:uppercase;line-height:.88;letter-spacing:-.01em;
+  font-size:clamp(2.8rem,13vw,11rem);align-self:center;margin:auto 0;text-align:center;text-shadow:0 10px 60px rgba(0,0,0,.55)}
+.pl-title .t-line{display:block;overflow:hidden}
+.pl-title .t-line>span{display:block;will-change:transform}
+.pl-bottom{display:grid;gap:.8rem;max-width:560px}
+.pl-num{font-family:var(--font-display);font-size:clamp(1.6rem,4vw,2.6rem);font-variant-numeric:tabular-nums}
+.pl-num i{font-style:normal;opacity:.55;font-size:.6em}
+.pl-hint{letter-spacing:.22em;text-transform:uppercase;font-size:.66rem;font-weight:700;opacity:.72}
+.pl-track{height:2px;background:rgba(244,234,214,.2);border-radius:2px;overflow:hidden}
+.pl-bar{height:100%;width:0;background:linear-gradient(90deg,var(--water-300),var(--green-300),var(--gold))}
+.pl-enter{position:absolute;left:50%;bottom:13%;transform:translateX(-50%);z-index:4;opacity:0;pointer-events:none;
+  font-weight:800;letter-spacing:.2em;text-transform:uppercase;font-size:.74rem;display:flex;align-items:center;gap:.65rem;transition:opacity .5s}
+.pl-enter.show{opacity:1}
+.pl-enter::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--green-300);box-shadow:0 0 0 0 rgba(132,224,180,.6);animation:enterPulse 1.6s ease-out infinite}
+@keyframes enterPulse{to{box-shadow:0 0 0 18px rgba(132,224,180,0)}}
+.preloader.entering{cursor:none}
 
 /* ---------- Scroll progress (water tube) ---------- */
 .progress{position:fixed;top:0;right:24px;bottom:0;width:5px;z-index:95;display:flex;align-items:center;pointer-events:none}
