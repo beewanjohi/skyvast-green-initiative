@@ -30,18 +30,18 @@
   function initHeroInteractions() {
     if (reduce) return;
     var hero = doc.querySelector(".hero"); if (!hero) return;
-    var orb = hero.querySelector(".hero-orb"), title = doc.getElementById("heroTitle");
-    var tx = 0, ty = 0, ox = 0, oy = 0, active = false;
+    var img = hero.querySelector(".hero-bg img"), title = doc.getElementById("heroTitle");
+    var tx = 0, ty = 0, ox = 0, oy = 0;
     hero.addEventListener("pointermove", function (e) {
       var r = hero.getBoundingClientRect();
       tx = (e.clientX - r.left) / r.width - 0.5;
-      ty = (e.clientY - r.top) / r.height - 0.5; active = true;
+      ty = (e.clientY - r.top) / r.height - 0.5;
     });
     hero.addEventListener("pointerleave", function () { tx = 0; ty = 0; });
     (function loop() {
-      ox += (tx - ox) * 0.07; oy += (ty - oy) * 0.07;
-      if (orb) orb.style.transform = "translate(" + (ox * 42) + "px," + (oy * 42) + "px) scale(1.03)";
-      if (title) title.style.transform = "translate(" + (ox * -28) + "px," + (oy * -18) + "px)";
+      ox += (tx - ox) * 0.06; oy += (ty - oy) * 0.06;
+      if (img) img.style.transform = "translate(" + (ox * -30) + "px," + (oy * -26) + "px) scale(1.1)";
+      if (title) title.style.transform = "translate(" + (ox * 24) + "px," + (oy * 16) + "px)";
       requestAnimationFrame(loop);
     })();
   }
@@ -167,9 +167,9 @@
         scrollTrigger: { trigger: el.closest("section") || el, start: "top bottom", end: "bottom top", scrub: true } });
     });
 
-    // Hero orb drifts up + scales as you scroll past
-    var orbWrap = doc.getElementById("heroOrb");
-    if (orbWrap) gsap.to(orbWrap, { yPercent: -22, scale: 1.18, opacity: 0.55, ease: "none",
+    // Hero background slowly scales + dims as you scroll past
+    var heroBg = doc.getElementById("heroBg");
+    if (heroBg) gsap.to(heroBg, { scale: 1.14, opacity: 0.6, ease: "none", transformOrigin: "50% 50%",
       scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
 
     // Fade-up groups
