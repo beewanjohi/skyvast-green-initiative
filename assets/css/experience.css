@@ -119,9 +119,29 @@ a{color:inherit;text-decoration:none}
 
 /* ---------- HERO ---------- */
 .hero{min-height:100vh;display:grid;place-items:center;text-align:center;position:relative}
-/* full-bleed falling-drop hero */
+/* full-bleed multi-angle hero */
 .hero-bg{position:absolute;inset:-8%;z-index:0;overflow:hidden;will-change:transform;perspective:1100px}
-.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 52%;transform:scale(1.08);will-change:transform;backface-visibility:hidden}
+.hero-bg-inner{position:absolute;inset:0;will-change:transform;backface-visibility:hidden}
+.hero-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;transform:scale(1.06);
+  opacity:0;transition:opacity 1.1s var(--ease), transform 6s var(--ease);will-change:opacity}
+.hero-slide.active{opacity:1;transform:scale(1.1)}
+
+/* angle toggle */
+.hero-angles{position:absolute;left:clamp(1.2rem,4vw,3rem);bottom:4.5vh;z-index:5;display:flex;flex-direction:column;gap:.5rem}
+.hero-angles button{display:flex;align-items:center;gap:.7rem;padding:.5rem .7rem;border-radius:12px;color:#fff;text-align:left;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(6px);transition:.3s;opacity:.62;cursor:none}
+.hero-angles button .num{font-family:var(--font-display);font-size:.8rem;opacity:.7;font-variant-numeric:tabular-nums}
+.hero-angles button .lbl{font-weight:700;font-size:.78rem;letter-spacing:.02em;white-space:nowrap}
+.hero-angles button:hover{opacity:.9}
+.hero-angles button.active{opacity:1;background:rgba(67,195,137,.22);border-color:rgba(132,224,180,.5)}
+.hero-angles button.active .num{color:var(--green-300);opacity:1}
+.hero-angles .prog{position:relative;width:18px;height:2px;border-radius:2px;background:rgba(255,255,255,.25);overflow:hidden;flex:none}
+.hero-angles button.active .prog::after{content:"";position:absolute;inset:0;width:0;background:var(--green-300);animation:angleProg 6s linear forwards}
+@keyframes angleProg{to{width:100%}}
+@media(max-width:760px){
+  .hero-angles{flex-direction:row;flex-wrap:wrap;left:0;right:0;justify-content:center;bottom:auto;top:74vh}
+  .hero-angles button .lbl{display:none}
+}
 .hero-scrim{position:absolute;inset:0;z-index:1;background:
   linear-gradient(180deg, rgba(8,32,22,.55) 0%, rgba(8,32,22,.12) 32%, rgba(8,32,22,.22) 58%, rgba(8,32,22,.82) 100%),
   radial-gradient(80% 60% at 50% 45%, rgba(20,147,191,.12), transparent 70%)}

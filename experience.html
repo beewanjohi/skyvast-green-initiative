@@ -62,7 +62,15 @@
 
 <!-- ===================== HERO ===================== -->
 <section class="hero" data-theme="green">
-  <div class="hero-bg" id="heroBg"><img src="assets/img/hero-drop-alt.jpg" alt="A drop of water falling toward a young seedling in arid land" /></div>
+  <div class="hero-bg" id="heroBg">
+    <div class="hero-bg-inner" id="heroBgInner">
+      <img class="hero-slide active" src="assets/img/angle1.jpg" alt="Hands nurturing a young seedling drip-fed to life in the soil" />
+      <img class="hero-slide" src="assets/img/angle2.jpg" alt="A seedling rising beside a drip-irrigation line" />
+      <img class="hero-slide" src="assets/img/angle3.jpg" alt="Watering young plants taking root in dry ground" />
+      <img class="hero-slide" src="assets/img/angle4.jpg" alt="An aerial view of a restored dam and reservoir" />
+      <img class="hero-slide" src="assets/img/angle5.jpg" alt="A restored catchment and watershed feeding the land" />
+    </div>
+  </div>
   <div class="hero-scrim" aria-hidden="true"></div>
   <div class="wrap">
     <h1 class="mega" data-split-lines id="heroTitle">
@@ -71,6 +79,15 @@
       <span class="ln"><span>everything.</span></span>
     </h1>
   </div>
+
+  <div class="hero-angles" id="heroAngles" aria-label="View different angles of our water story">
+    <button type="button" class="active" data-angle="0" data-cursor><span class="num">01</span><span class="lbl">Nurtured by hand</span><span class="prog"></span></button>
+    <button type="button" data-angle="1" data-cursor><span class="num">02</span><span class="lbl">Drip by drip</span><span class="prog"></span></button>
+    <button type="button" data-angle="2" data-cursor><span class="num">03</span><span class="lbl">Every drop counts</span><span class="prog"></span></button>
+    <button type="button" data-angle="3" data-cursor><span class="num">04</span><span class="lbl">The dams we build</span><span class="prog"></span></button>
+    <button type="button" data-angle="4" data-cursor><span class="num">05</span><span class="lbl">Catchments restored</span><span class="prog"></span></button>
+  </div>
+
   <div class="hero-foot">
     <div class="hero-brand">SkyVast Green Initiative</div>
     <div class="div" aria-hidden="true"></div>
