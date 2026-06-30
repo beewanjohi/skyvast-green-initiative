@@ -227,3 +227,23 @@ a{color:inherit;text-decoration:none}
   body.exp{cursor:auto}
   .cursor,.cursor-dot{display:none}
 }
+
+/* ---------- per-angle caption ---------- */
+.hero-cap{position:relative;z-index:3;margin:1.5rem auto 0;max-width:46ch;font-size:clamp(1rem,1.7vw,1.3rem);line-height:1.5;
+  color:#eaf5ee;opacity:0;transform:translateY(8px);transition:opacity .6s var(--ease),transform .6s var(--ease);text-shadow:0 2px 16px rgba(0,0,0,.6)}
+.hero-cap.show{opacity:.96;transform:none}
+
+/* ---------- chapter enrichment photos (parallax depth) ---------- */
+.ch-photo{position:absolute;inset:-8%;z-index:0;overflow:hidden;will-change:transform}
+.ch-photo img{width:100%;height:100%;object-fit:cover;opacity:.5}
+.ch-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(6,16,11,.62),rgba(6,16,11,.24) 38%,rgba(6,16,11,.74))}
+.chapter .wrap.content,.chapter .content{position:relative;z-index:3}
+.c-econ .ch-photo img{opacity:.34}
+.c-econ .ch-scrim{background:linear-gradient(180deg,rgba(245,225,180,.25),rgba(231,181,60,.08) 45%,rgba(120,84,30,.32))}
+.marquee{z-index:3}
+
+/* ---------- pillar panel photos ---------- */
+.pillar-panel .panel-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.52;z-index:0}
+.pillar-panel .panel-tint{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,32,22,.2),rgba(8,32,22,.9))}
+.pillar-panel .pno{z-index:2}
+.pillar-panel h3,.pillar-panel p{position:relative;z-index:2}

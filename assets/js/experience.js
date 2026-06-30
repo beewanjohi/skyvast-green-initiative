@@ -60,11 +60,25 @@
     var wrap = doc.getElementById("heroAngles"); if (!wrap) return;
     var slides = doc.querySelectorAll(".hero-slide");
     var btns = wrap.querySelectorAll("button");
+    var cap = doc.getElementById("heroCap");
+    var caps = [
+      "For millions in Kenya's drylands, the nearest water is a half-day's walk away.",
+      "Every day, women and children carry the burden — kilometres for a single jerry can.",
+      "So we catch the rains: water pans, sand dams and restored catchments that hold the year's life.",
+      "Secure water turns bare, cracked ground into something living again.",
+      "And living land becomes food, income and a future — led by women and youth."
+    ];
     var i = 0, timer = null, DUR = 6000;
+    function setCap(n) {
+      if (!cap) return;
+      cap.classList.remove("show");
+      setTimeout(function () { cap.textContent = caps[n] || ""; cap.classList.add("show"); }, 280);
+    }
     function show(n, manual) {
       i = (n + slides.length) % slides.length;
       slides.forEach(function (s, k) { s.classList.toggle("active", k === i); });
       btns.forEach(function (b, k) { b.classList.toggle("active", k === i); });
+      setCap(i);
       if (manual) restart();
     }
     function next() { show(i + 1); }
