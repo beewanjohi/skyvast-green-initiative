@@ -247,3 +247,107 @@ a{color:inherit;text-decoration:none}
 .pillar-panel .panel-tint{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,32,22,.2),rgba(8,32,22,.9))}
 .pillar-panel .pno{z-index:2}
 .pillar-panel h3,.pillar-panel p{position:relative;z-index:2}
+
+/* ==========================================================================
+   Restoration · BEFORE / AFTER comparison slider
+   ========================================================================== */
+.c-restore{background:linear-gradient(180deg,#0c2a1d,#103a28)}
+
+.ba{max-width:980px;width:100%;margin:0 auto}
+.ba-figure{
+  position:relative;margin:0;border-radius:24px;overflow:hidden;
+  aspect-ratio:16/10;background:#0c2a1d;
+  border:1px solid rgba(67,195,137,.25);
+  box-shadow:0 30px 80px -30px rgba(0,0,0,.7);
+  user-select:none;-webkit-user-select:none;touch-action:pan-y
+}
+.ba-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+/* BEFORE sits on top, clipped to the divider position */
+.ba-before{clip-path:inset(0 calc(100% - var(--pos,50%)) 0 0)}
+
+/* corner tags */
+.ba-tag{
+  position:absolute;top:1rem;z-index:4;pointer-events:none;
+  font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:.62rem;
+  padding:.4rem .7rem;border-radius:99px;backdrop-filter:blur(6px);
+  background:rgba(12,42,29,.55);border:1px solid rgba(244,234,214,.22);color:var(--bone)
+}
+.ba-tag-before{left:1rem}
+.ba-tag-after{right:1rem;background:rgba(20,147,191,.32);border-color:rgba(127,209,232,.4)}
+
+/* the divider line + round handle (purely visual; the range input drives it) */
+.ba-divider{
+  position:absolute;top:0;bottom:0;left:var(--pos,50%);width:2px;z-index:5;pointer-events:none;
+  background:rgba(244,234,214,.92);transform:translateX(-1px);box-shadow:0 0 0 1px rgba(0,0,0,.25)
+}
+.ba-handle{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:48px;height:48px;border-radius:50%;display:grid;place-items:center;
+  color:var(--green-900);background:var(--bone);box-shadow:0 6px 22px rgba(0,0,0,.45);
+  transition:transform .15s var(--ease),background .2s
+}
+.ba-figure:focus-within .ba-handle{background:var(--green-300);transform:translate(-50%,-50%) scale(1.08)}
+
+/* nudge pulse until first interaction */
+.ba-handle::after{
+  content:"";position:absolute;inset:-6px;border-radius:50%;
+  border:2px solid var(--green-300);opacity:0;animation:baPulse 2.4s var(--ease) infinite
+}
+@keyframes baPulse{0%{transform:scale(.8);opacity:.55}70%{opacity:0}100%{transform:scale(1.5);opacity:0}}
+.ba-figure.touched .ba-handle::after{animation:none;display:none}
+
+/* the real control: a full-area, invisible native range input
+   → mouse drag, touch drag AND keyboard arrows all work for free */
+.ba-range{
+  position:absolute;inset:0;width:100%;height:100%;margin:0;z-index:6;
+  -webkit-appearance:none;appearance:none;background:transparent;
+  cursor:ew-resize;opacity:0;touch-action:pan-y
+}
+.ba-range:focus{outline:none}
+.ba-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:48px;height:1200px;cursor:ew-resize}
+.ba-range::-moz-range-thumb{width:48px;height:1200px;border:0;background:transparent;cursor:ew-resize}
+.ba-range::-webkit-slider-runnable-track{background:transparent;border:0}
+.ba-range::-moz-range-track{background:transparent;border:0}
+
+@media(max-width:760px){
+  .ba-figure{aspect-ratio:4/5}
+  .ba-handle{width:42px;height:42px}
+}
+
+/* ==========================================================================
+   Robustness · hero layout on short viewports
+   ========================================================================== */
+.hero-cap{pointer-events:none}
+
+@media (max-height: 860px){
+  .hero{align-items:start}
+  .hero > .wrap{margin-top:15vh}
+  .hero-strap{display:none}
+}
+@media (max-height: 620px){
+  .hero > .wrap{margin-top:10vh}
+  .hero-cap{font-size:1rem;margin-top:1.1rem}
+}
+
+/* ==========================================================================
+   Credibility · spell out ASAL + make the "verified" claim a link
+   ========================================================================== */
+.pl-define{
+  letter-spacing:.22em;text-transform:uppercase;font-size:.6rem;font-weight:800;
+  color:var(--green-300);opacity:.85
+}
+.ver-link{transition:opacity .2s}
+.ver-link .ver-cta{opacity:.7;font-weight:700;text-transform:none;letter-spacing:.04em}
+.ver-link:hover .ver-cta{opacity:1;text-decoration:underline;text-underline-offset:3px}
+
+/* ==========================================================================
+   Mobile · stack the pinned pillars instead of horizontal-scrolling them
+   (pairs with the small mobile guard in experience.js that skips the pin)
+   ========================================================================== */
+@media(max-width:760px){
+  .c-pillars{display:block!important;min-height:0;padding:13vh 0 8vh!important}
+  .h-head{position:static;left:auto;top:auto;padding:0 6vw 1.6rem}
+  .h-pin{height:auto;overflow:visible;display:block}
+  .h-track{flex-direction:column;transform:none!important;padding-inline:6vw;gap:1.2rem}
+  .pillar-panel{flex:0 0 auto;width:100%;height:auto;min-height:52vh}
+}

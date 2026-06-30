@@ -236,9 +236,12 @@
     if (tank) gsap.fromTo(tank, { height: "6%" }, { height: "86%", ease: "none",
       scrollTrigger: { trigger: ".c-water", start: "top 70%", end: "bottom bottom", scrub: true } });
 
-    // Horizontal pillars
+    // Horizontal pillars — pinned + scrubbed on desktop only.
+    // On phones (<=760px) the panels stack vertically (see CSS), so we skip the
+    // pin entirely: it was the main source of mobile scroll jank.
     var track = doc.getElementById("hTrack"), pin = doc.getElementById("hPin");
-    if (track && pin) {
+    var pillarsHorizontal = window.matchMedia("(min-width:761px)").matches;
+    if (track && pin && pillarsHorizontal) {
       var getScroll = function () { return track.scrollWidth - pin.clientWidth + window.innerWidth * 0.16; };
       gsap.to(track, { x: function () { return -getScroll(); }, ease: "none",
         scrollTrigger: { trigger: ".c-pillars", start: "top top", end: function () { return "+=" + getScroll(); },
@@ -314,4 +317,27 @@
     window.addEventListener("load", runPreloader);
     setTimeout(function () { if (!runPreloader._started) runPreloader(); }, 1400);
   }
+})();
+
+/* ==========================================================================
+   Restoration · BEFORE / AFTER comparison slider
+   Self-contained: works with mouse, touch and keyboard; no GSAP needed.
+   ========================================================================== */
+(function () {
+  "use strict";
+  function init() {
+    var fig = document.getElementById("baFigure");
+    if (!fig) return;
+    var range = fig.querySelector(".ba-range");
+    function set(v) { fig.style.setProperty("--pos", v + "%"); }
+    if (range) {
+      var onMove = function () { fig.classList.add("touched"); set(range.value); };
+      range.addEventListener("input", onMove);
+      range.addEventListener("change", onMove);
+      range.addEventListener("pointerdown", function () { fig.classList.add("touched"); });
+      set(range.value);
+    }
+  }
+  if (document.readyState !== "loading") init();
+  else document.addEventListener("DOMContentLoaded", init);
 })();
