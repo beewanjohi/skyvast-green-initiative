@@ -48,7 +48,7 @@
       var sx = sp * 34, sy = sp * 58, sRot = sp * 1.4;
       if (inner) inner.style.transform =
         "translate3d(" + (ox * -28 + sx) + "px," + (oy * -24 + sy) + "px,0) scale(" + (1 + sp * 0.06) + ") rotate(" + (ox * 1.3 + sRot) + "deg)";
-      if (title) title.style.transform = "translate(" + (ox * 22 + sx * 0.35) + "px," + (oy * 14 - sy * 0.55) + "px)";
+      if (title) title.style.transform = "translate(" + (ox * 18 + sx * 0.3) + "px," + (oy * 7 - sy * 0.55) + "px)";
       if (foot) { foot.style.transform = "translateY(" + (sy * 0.5) + "px)"; foot.style.opacity = String(1 - sp * 1.3); }
       if (cue) cue.style.opacity = String(0.6 - sp * 1.2);
       requestAnimationFrame(loop);
